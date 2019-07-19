@@ -1,6 +1,6 @@
 {
   "schema": {
-    "type": "service_blueprint",
+    "type": "app_blueprint",
     "version": {
       "major": 0,
       "minor": 1
@@ -15,12 +15,58 @@
         "level": "alpha",
         "patch": 0
       }
-    }
+    },
+    "software": {
+      "display": {
+        "title": "RichFilemanager"
+      }
+    },
+    "timestamp": "2019-07-20T08:34:37+10:00"
   },
   "software": {
     "base": {
-      "default_stop_timeout": 0,
-      "restart_attempts": 0
-    }
+      "name": "filemanager",
+      "framework": "apache_php",
+      "deployment_type": "web",
+      "http_protocol": "https_only",
+      "memory": {
+        "required": 96,
+        "recommended": 128
+      }
+    },
+    "scripts": {
+      "start": {
+        "language": "sh"
+      },
+      "install": {
+        "content": "#!/bin/sh\r\n\r\ncd /home/\r\ncomposer create-project --prefer-dist servocoder/richfilemanager app"
+      }
+    },
+    "installed_packages": [
+      {
+        "name": "RichFilemanager.git",
+        "download_type": "git",
+        "source_url": "http://github.com/servocoder/RichFilemanager.git",
+        "destination": "./",
+        "extraction_command": "RichFilemanager.git",
+        "path_to_extracted": "RichFilemanager"
+      }
+    ],
+    "service_configurations": [
+      {
+        "publisher_namespace": "EnginesSystem",
+        "type_path": "filesystem/local/filesystem",
+        "variables": {
+          "service_name": "_Engines_Builder(engine_name)",
+          "volume_src": "",
+          "engine_path": "/home/fs/volume",
+          "permissions": "rw",
+          "user": "_Engines_Builder(cont_user_id)",
+          "group": "_Engines_Builder(data_gid)",
+          "fw_user": "_Engines_Builder(cont_user_id)",
+          "exclude_from_backup": "false"
+        }
+      }
+    ]
   }
 }
