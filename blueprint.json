@@ -21,7 +21,7 @@
         "title": "RichFilemanager"
       }
     },
-    "timestamp": "2019-07-20T09:09:35+10:00"
+    "timestamp": "2019-07-20T09:14:33+10:00"
   },
   "software": {
     "base": {
@@ -39,7 +39,7 @@
         "language": "sh"
       },
       "install": {
-        "content": "#!/bin/sh\r\n\r\n\r\n /usr/local/bin/composer.phar create-project --prefer-dist /home/app"
+        "content": "#!/bin/sh\r\nmkdir /tmp/composer &&\\\r\n\tcd /tmp/composer &&\\\r\n\tcurl -sS https://getcomposer.org/installer | php &&\\\r\n\r\n\r\n /tmp/composer/composer.phar create-project --prefer-dist /home/app"
       }
     },
     "installed_packages": [
